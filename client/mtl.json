@@ -1,0 +1,146 @@
+{	"attributes": {},
+	"entities": {
+		"User": {
+			"key": "user_id",
+			"properties": {
+				"user_id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"cards": {
+					"type": "has_many",
+					"property": "user_id",
+					"to": {
+						"type": "Card",
+						"property": "user_id"
+					},
+					"back": "user"
+				}
+			}
+		},
+		"Card": {
+			"key": "card_id",
+			"properties": {
+				"card_id": {
+					"type": "string"
+				},
+				"user_id": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"user": {
+					"type": "has_a",
+					"property": "user_id",
+					"to": {
+						"type": "User",
+						"property": "user_id"
+					},
+					"back": "cards"
+				}
+			}
+		},
+		"Legislator": {
+			"key": "legislator_id",
+			"properties": {
+				"legislator_id" : {
+					"type": "string"
+				},
+				"last_name" : {
+					"type" : "String"
+				},
+				"updated" : {
+					"type" : "String"
+				},
+				"name" : {
+					"type" : "String"
+				},
+				"first_name" : {
+					"type" : "String"
+				},
+				"middle_name" : {
+					"type" : "String"
+				},
+				"district" : {
+					"type" : "String"
+				},
+				"state" : {
+					"type" : "String"
+				},
+				"votesmart_id" : {
+					"type" : "String"
+				},
+				"party" : {
+					"type" : "String"
+				},
+				"zip" : {
+					"type" : "String"
+				},
+				"email" : {
+					"type" : "String"
+				},
+				"active" : {
+					"type" : "String"
+				},
+				"transparencydata_id" : {
+					"type" : "String"
+				},
+				"photo_url" : {
+					"type" : "String"
+				},
+				"level" : {
+					"type" : "String"
+				},
+				"country" : {
+					"type" : "String"
+				},
+				"chamber" : {
+					"type" : "String"
+				},
+				"city" : {
+					"type" : "String"
+				},
+				"address" : {
+					"type" : "String"
+				}
+			},
+			"relationships": {
+				"offices": {
+					"type": "has_many",
+					"property": "legislator_id",
+					"to": {
+						"type": "Office",
+						"property": "legislator_id"
+					},
+					"back": "legislator"
+				}
+			}
+		},
+		"Office": {
+			"key": "office_id",
+			"properties": {
+				"office_id": {
+					"type": "string"
+				},
+				"legislator_id": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"legislature": {
+					"type": "has_a",
+					"property": "legislator_id",
+					"to": {
+						"type": "Legislator",
+						"property": "legislator_id"
+					},
+					"back": "legislator"
+				},
+			}
+		}
+	}
+}

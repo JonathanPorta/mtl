@@ -1,0 +1,16 @@
+{
+  "name": "mtl",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": "~1.8.0",
+    "bootstrap": "~2.2.2",
+    "angular": "git://github.com/angular/bower-angular.git#~v1.0.3",
+    "angular-ui": "git://github.com/angular-ui/angular-ui.git#~v0.3.2",
+    "jefri": "git://github.com/jefri/runtime#~1.0.2",
+    "jefri-angular": "git://github.com/jefri/angular#~1.0.3",
+    "jefri-stores": "git://github.com/jefri/stores#~1.0.0",
+    "bootstrap": "git://github.com/twitter/bootstrap.git#~v2.2",
+    "underscore": "git://github.com/documentcloud/underscore.git#1.4.3",
+    "superscore": "git://github.com/DavidSouther/superscore.git#~0.3.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "mtl",
+  "title": "mtl",
+  "homepage": "",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jonathan Porta",
+    "email": "<jonathan@jonathanporta.com>"
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:JonathanPorta/mtl.git"
+  },
+  "keywords": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "scripts": {
+    "start": "node lib/appserver.js"
+  },
+  "dependencies": {
+    "superscore": "*",
+    "jefri": ">=1",
+    "jefri-stores": "*",
+    "jefri-server": "*",
+    "express": "*"
+  },
+  "devDependencies": {
+    "grunt-livescript": "*",
+    "grunt-contrib": "*",
+    "grunt-wrap": "*",
+    "requirejs": "*",
+    "grunt": "~0.3.17",
+    "jefri-modeler": "*",
+    "grunt-contrib-concat": "~0.1.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
