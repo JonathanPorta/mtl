@@ -13,14 +13,20 @@
 		mtl.prototype.exceptions = [];
 
 		mtl.prototype.load = function(){
+			var self = this;
+			JEFRi.get({'_type': 'Legislator'}).done(function(res){
+				self.legislators = res.entities;
+				herald.trigger("load");
+				console.log("JEFRi LOaded!");
+			});
 			//Dummy Data!
-			this.create("Legislator", {name : "1215 Harney"});
-			this.create("Legislator", {name : "3528 Carmel"});
-			this.create("Legislator", {name : "233 Ashley Ct N"});
-			this.create("Legislator", {name : "1213 Concord"});
+//			this.create("Legislator", {name : "1215 Harney"});
+//			this.create("Legislator", {name : "3528 Carmel"});
+//			this.create("Legislator", {name : "233 Ashley Ct N"});
+//			this.create("Legislator", {name : "1213 Concord"});
 
-			console.log("mtl load");
-			herald.trigger("load");
+//			console.log("mtl load");
+//			herald.trigger("load");
 		};
 
 		mtl.prototype.getLegislators = function(){
