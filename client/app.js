@@ -42,10 +42,11 @@
 	}]);
 
 	angular.classes({
-		navDrop: "btn btn-navbar",
-		menu: "navbar navbar-inverse navbar-fixed-top",
-		content: "container",
-		table: "table-striped"
+		navDrop  : "btn btn-navbar",
+		menu     : "navbar navbar-static-top",
+		content  : "container",
+		table    : "table-striped table-condensed",
+		listview : "table table-striped table-condensed"
 	});
 
 	function curry$(f, args){

@@ -3,6 +3,7 @@
 	angular.module('mtl').factory('mtl', function(JEFRi, herald){
 		var mtl = function(){
 			var self = this;
+			self.loaded = false;
 
 			JEFRi.ready.then(function(){
 				self.load();
@@ -14,8 +15,9 @@
 
 		mtl.prototype.load = function(){
 			var self = this;
-			JEFRi.get({'_type': 'Legislator'}).done(function(res){
-				self.legislators = res.entities;
+			self.loaded = true;
+			JEFRi.get({'_type': 'Legislator', offices:{}}).done(function(res){
+				self.legislators = JEFRi.find({_type:"Legislator"});
 				herald.trigger("load");
 				console.log("JEFRi LOaded!");
 			});

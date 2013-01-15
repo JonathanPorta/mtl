@@ -61,8 +61,8 @@ module.exports = function(grunt) {
 			dev: {
 				files: {
 					'build/styles/components.css' : ['client/components/**/*styl'],
-					'build/styles/pages.css'      : ['client/pages/**/*styl']//,
-//					'build/styles/directives.css' : ['client/directives/**/*styl']
+					'build/styles/pages.css'      : ['client/pages/**/*styl'],
+					'build/styles/app.css'        : ['client/app.styl']
 				}
 			}
 		},

@@ -8,6 +8,7 @@ html(lang="en")
 		link(rel="stylesheet", href="vendor/bootstrap/docs/assets/css/bootstrap-responsive.css")
 		link(rel="stylesheet", href="styles/components.css")
 		link(rel="stylesheet", href="styles/pages.css")
+		link(rel="stylesheet", href="styles/app.css")
 
 		//- In Dependency order, or close enough.
 		script(src="vendor/jquery/jquery.min.js")
@@ -28,20 +29,22 @@ html(lang="en")
 	body
 		.app(ng:app="mtl")
 			//- This menu bar markup comes from Bootstrap's responsive header.
-			.menu
+			.navbar.navbar-fixed-top
 				.navbar-inner
 					.container
 						//- The navDrop button expands and collapses the menu when responsively small.
-						button.navDrop(type="button", data-toggle="collapse", data-target=".nav-collapse")
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
+						//- button.navDrop(type="button", data-toggle="collapse", data-target=".nav-collapse")
+							//- span.icon-bar
+							//- span.icon-bar
+							//- span.icon-bar
 						a.brand(href="#/") mt legislature
-						.nav-collapse
-							ul.nav
-								//- Add new top-level menu items here
-								li
-									a(href="#/map") Map
+					//- .nav-collapse
+					//- ul.nav
+						//- Add new top-level menu items here
+						//- li
+							//- a(href="#/map") Upper
+						//- li
+							//- a(href="#/map") Lower
 			.content
 				ng:view
 

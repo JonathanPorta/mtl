@@ -128,17 +128,35 @@
 				},
 				"legislator_id": {
 					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"address": {
+					"type": "string"
+				},
+				"phone": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"fax": {
+					"type": "string"
 				}
 			},
 			"relationships": {
-				"legislature": {
+				"legislator": {
 					"type": "has_a",
 					"property": "legislator_id",
 					"to": {
 						"type": "Legislator",
 						"property": "legislator_id"
 					},
-					"back": "legislator"
+					"back": "offices"
 				}
 			}
 		}
