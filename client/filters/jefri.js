@@ -1,53 +1,60 @@
 (function(){
-	angular.module('mtl').filter('jefri', function($filter) {
-		return function(entities, params){
-			var strict = true;
-			if(params.hasOwnProperty("_strict"))
-				strict = params["_strict"];
-			if(entities instanceof Array)
-			{	//Loop through and call filter on each.
-				var matches = [];
-				for(var i=0; i<entities.length; i++){
-					var e = $filter("jefri")(entities[i], params);
-					if(e)
-						matches.push(e);
-				}
-				return matches;
-			}
-			else
-			{	//Do actual figurin' here.
-				//Just so we don't forget it is just one...
-				var entity = entities;
+	// Prepare a function to perform filters given a set of parameters.
+	var filterFn = function(params, strict){
+		if(false !== strict)
+		{
+			strict = true;
+		}
+		// Return a function that handles the actual filtering.
+		return function(entities){
+			var matches = [];
+			entities.forEeach(function(entity){
 				var isMatch = false;
 				for(var field in params)
 				{
-					if(field == "_strict")
-						break;
-
-					switch(strict)
+					if(strict)
 					{
-						case true:
-							if(entity[field]() == params[field])
-							{
-								isMatch = true;
-							}
-							else
-							{
-								isMatch = false;
-							}
-						break;
-						case false:
-							var searchValue = params[field] || "";
-							var value = entity[field]();
-							var valueUpper = value.toUpperCase();
-							if(valueUpper.indexOf(searchValue.toUpperCase()) > -1)
-								isMatch = true;
-						break;
+						isMatch = isMatch || (entity[field]() === params[field])
+					}
+					else
+					{
+						var searchValue = params[field] || "";
+						var value = entity[field]();
+						var valueUpper = value.toUpperCase();
+						if(valueUpper.indexOf(searchValue.toUpperCase()) > -1)
+						{
+							isMatch = isMatch || true;
+						}
 					}
 				}
 				if(isMatch)
-					return entity;
+				{
+					matches.push(entity);
+				}
 			}
+		}
+	}
+
+	angular.module('mtl').filter('jefri', function($filter) {
+		return function(entities, params){
+			var strict = true,
+			    single = false;
+			if(params.hasOwnProperty("_strict"))
+			{
+				strict = params["_strict"];
+				delete params["_strict"];
+			}
+
+			if(!(entities instanceof Array))
+			{
+				entities = [entities];
+				single = true
+			}
+
+			var filter = filterFn(params, strict);
+			var matches = filter(entities);
+
+			return single ? matches[0] : matches
 		};
 	});
 }).call(this);
