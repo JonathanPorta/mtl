@@ -2,39 +2,21 @@
 var querystring = require('querystring');
 var http = require('http');
 var fs = require('fs');
-var server = require('jefri-server');
+var jefri = require('jefri'),
+    runtime = new JEFRi.Runtime();
+require("jefri-stores");
+var _ = require("superscore");
 
 function PostCode(entities) {
-	// Build the post string from an object
-	var trans = {"attributes":{},"entities":entities};
-	var post_data = JSON.stringify(trans);
-//	var post_data = trans;
-	console.log("Final Trans:" + post_data);
-
-	// An object of options to indicate where to post to
-	var post_options = {
-		host: 'localhost',
-		port: 3000,
-		path: '/persist',
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			'Content-Length': post_data.length
-		}
-	};
-
-	// Set up the request
-	var post_req = http.request(post_options, function(res) {
-		res.setEncoding('utf8');
-		res.on('data', function (chunk) {
-//			console.log('Response: ' + chunk);
-		});
-	});
-
-	// post the data
-//	post_req.write(post_data);
-	post_req.end();
-
+      var t, storeOptions, s;
+      t = new window.JEFRi.Transaction();
+      t.add(ents);
+      storeOptions = {
+		remote: 'http://localhost:3000/',
+		runtime: runtime
+      };
+      s = new jefri.Stores.PostStore(storeOptions);
+      return s.execute('persist', t);
 }
 
 function mine() {
@@ -63,13 +45,17 @@ function mine() {
 				delete data["+zip"];
 				delete data["+city"];
 				delete data["+address"];
-				var l = server.jefri.runtime.build("Legislator", data);
+				var l = runtime.build("Legislator", data);
+				// Override the ID, probably by hashing the name and city.
+				l.legislator_id(_.UUID.v5());
+
 				var entities = [];
 				entities.push(l)
 				for(var of = 0; of < offices.length; of++)
 				{
-					var office = server.jefri.runtime.build("Office", offices[of]);
-//					console.log(office);
+					var office = runtime.build("Office", offices[of]);
+					// Override the office id.
+					
 					l.offices(office);
 					entities.push(office);
 				}
@@ -84,4 +70,4 @@ function mine() {
 	});
 }
 
-server.jefri.runtime.load("http://localhost:3000/context.json").done(mine);
+runtime.load("http://localhost:3000/context.json").done(mine);
