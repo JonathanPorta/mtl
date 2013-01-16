@@ -7,6 +7,9 @@ var jefri = require('jefri'),
 require("jefri-stores");
 var _ = require("superscore");
 
+var NS_MSG = "MTL"; // This is the unique message for the namespace.
+var NS = _.UUID.v5(NS_MSG);
+
 function PostCode(entities) {
 	var t, storeOptions, s;
 	t = new jefri.Transaction();
@@ -48,7 +51,7 @@ function mine() {
 				delete data["+address"];
 				var l = runtime.build("Legislator", data);
 				// Override the ID, probably by hashing the name and city.
-				//l.legislator_id(_.UUID.v5());
+				l.legislator_id(_.UUID.v5(l.name() + l.city(), NS));
 
 				var entities = [];
 				entities.push(l)
@@ -56,6 +59,7 @@ function mine() {
 				{
 					var office = runtime.build("Office", offices[of]);
 					// Override the office id.
+					office.office_id(_.UUID.v5(office.address(), NS));
 
 					l.offices(office);
 					entities.push(office);
