@@ -23,7 +23,7 @@
     "start": "node lib/appserver.js"
   },
   "dependencies": {
-    "superscore": "*",
+    "superscore": "~0.3.4",
     "jefri": ">=1",
     "jefri-stores": "*",
     "jefri-server": "*",
